@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Simple Web Sockets App Build with Tapir</title>
+</head>
+<body>
+<div id="jokes"></div>
+
+<script>
+    const ws = new WebSocket('ws://localhost:8080/ws/frames');
+    const messagesDiv = document.getElementById('jokes');
+
+    ws.onopen = function() {
+        console.log('WebSocket connection is OK');
+    };
+
+    ws.onmessage = function(event) {
+        const message = event.data;
+        const messageElement = document.createElement('p');
+        messageElement.textContent = message;
+        messagesDiv.appendChild(messageElement);
+    };
+</script>
+</body>
+</html>
